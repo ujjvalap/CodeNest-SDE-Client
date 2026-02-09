@@ -18,7 +18,7 @@ function Signup() {
     lname: "",
     email: "",
     password: "",
-    cpassword: "",
+    // cpassword: "",
     otp: "",
   });
 
@@ -50,30 +50,30 @@ function Signup() {
   }, [canResendOtp, remainingTime]);
 
   const validate = () => {
-    const newErrors = {};
+    const Errors = {};
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
 
     if (!credentials.fname || credentials.fname.length < 3)
-      newErrors.fname = "First name must be at least 3 characters.";
+      Errors.fname = "First name must be at least 3 characters.";
 
-    if (!credentials.lname) newErrors.lname = "Last name is required.";
+    if (!credentials.lname) Errors.lname = "Last name is required.";
 
     if (!credentials.email || !emailPattern.test(credentials.email))
-      newErrors.email = "Invalid email address.";
+      Errors.email = "Invalid email address.";
 
     if (!credentials.password || !passwordPattern.test(credentials.password))
-      newErrors.password =
+      Errors.password =
         "Password must be 8+ chars with uppercase, lowercase, number, and special char.";
 
     if (credentials.cpassword !== credentials.password)
-      newErrors.cpassword = "Passwords do not match.";
+      Errors.cpassword = "Passwords do not match.";
 
-    if (!credentials.otp) newErrors.otp = "OTP is required.";
+    if (!credentials.otp) Errors.otp = "OTP is required.";
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setErrors(Errors);
+    return Object.keys(Errors).length === 0;
   };
 
   const sendOTP = async () => {
@@ -124,7 +124,7 @@ function Signup() {
       navigate(type === "User" ? "/" : "/admin");
     } catch (err) {
       console.error("Register error:", err);
-      dispatch(setAuthError(err?.data?.message || "Error creating account"));
+      dispatch(setAuthError(err?.data?.message || "Error creating account "));
     }
   };
 
